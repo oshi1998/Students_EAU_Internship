@@ -1,0 +1,106 @@
+<?php
+require_once('services/connect.php');
+require_once('permissions/only_overseer.php');
+?>
+
+<?php
+//รับค่าตัวแปร
+$ovs_id = $_SESSION["AUTH_ID"];
+//คำสั่ง SQL SELECT ข้อมูลหัวหน้างานตามรหัส PK
+$sql = "SELECT * FROM overseers,internship_places WHERE overseers.intsp_id=internship_places.intsp_id AND ovs_id='$ovs_id'";
+$query = mysqli_query($conn, $sql);
+$ovsObj = mysqli_fetch_object($query);
+?>
+
+<?php
+//คำสั่ง SQL SELECT ข้อมูลนักศึกษาในการดูแล
+$sql = "SELECT * FROM students WHERE ovs_id='$ovs_id'";
+$query = mysqli_query($conn, $sql);
+$std_num_rows = mysqli_num_rows($query);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบการฝึกงานของนักศึกษาคณะเทคโนโลยีสารสนเทศมหาวิทยาลัยอีสเทิร์นเอเชีย</title>
+
+    <?php require_once('include/css.php'); ?>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- include menu -->
+        <?php require_once('include/menu.php') ?>
+        <!-- end include -->
+
+        <!-- content -->
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>ข้อมูลหัวหน้างาน</h3>
+                        <div class="row">
+                            <div class="col-md-3 col-12">
+                                <img class="img-responsive" src="assets/images/users/<?= $ovsObj->ovs_image ?>">
+                            </div>
+                            <div class="col-md-9 col-12">
+                                <p>ชื่อ: <?= $ovsObj->ovs_firstname ?></p>
+                                <p>นามสกุล: <?= $ovsObj->ovs_lastname ?></p>
+                                <p>เบอร์โทรติดต่อ: <?= $ovsObj->ovs_tel ?></p>
+                                <p>สถานที่ฝึกงาน: <?= $ovsObj->intsp_name ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>รายชื่อนักศึกษาในการดูแล (<?= $std_num_rows." คน" ?>)</h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>ชื่อ-นามสกุล</th>
+                                        <th>เบอร์โทรติดต่อ</th>
+                                        <th>รายงานฝึกงาน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $no=1; ?>
+                                    <?php foreach($query as $row) { ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $row['std_firstname']." ".$row['std_lastname'] ?></td>
+                                            <td><?= $row['std_tel'] ?></td>
+                                            <td>
+                                                <a href="ovs_std_internship_note.php?id=<?= $row['std_id'] ?>">รายงานฝึกงาน</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end content -->
+
+
+        <!-- include footer -->
+        <?php require_once('include/footer.php'); ?>
+        <!-- end include -->
+    </div>
+
+
+
+    <?php require_once('include/js.php'); ?>
+</body>
+
+</html>
