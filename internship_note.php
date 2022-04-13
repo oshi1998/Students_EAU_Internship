@@ -53,6 +53,7 @@ $stdObj = mysqli_fetch_object($query);
                                 <p>สถานะการฝึกงาน: <?= $stdObj->std_status ?></p>
 
                                 <a href="std_edit_form.php?id=<?= $std_id ?>">แก้ไขข้อมูลส่วนตัว</a>
+                                <a target="_blank" href="std_report.php?type=personal&std_id=<?= $std_id ?>">พิมพ์ประวัติส่วนตัว</a>
                             </div>
                         </div>
                     </div>
@@ -84,6 +85,11 @@ $stdObj = mysqli_fetch_object($query);
                                         <?php if ($intsn_object->intsn_job == "") :  ?>
                                             <a class="mt-3" href="internship_note_daily_add_form.php?week=<?= $i ?>">บันทึกการฝึกงานรายวัน</a>
                                             <a class="mt-3" href="internship_note_weekly_add_form.php?week=<?= $i ?>">บันทึกการฝึกงานรายสัปดาห์</a>
+                                        <?php else : ?>
+                                            <ul>
+                                                <li><a target="_blank" href="std_report.php?type=daily&week=<?= $i ?>&std_id=<?= $std_id ?>">บันทึกการลงเวลาปฏิบัติงาน (สัปดาห์ที่ <?= $i ?>)</a></li>
+                                                <li><a target="_blank" href="std_report.php?type=weekly&week=<?= $i ?>&std_id=<?= $std_id ?>">บันทึกรายละเอียดการฝึกปฏิบัติงานรายสัปดาห์ (สัปดาห์ที่ <?= $i ?>)</a></li>
+                                            </ul>
                                         <?php endif ?>
                                         <hr>
                                         <div class="table-responsive">
@@ -126,14 +132,14 @@ $stdObj = mysqli_fetch_object($query);
                                         <br>
 
                                         <?php
-                                            if($intsn_object->intsn_job != ""){
-                                                //select วันทำงาน แรกและสุดท้ายของสัปดาห์
-                                                $sql = "SELECT min(intsn_date) as min_date,max(intsn_date) as max_date FROM internship_notes WHERE intsn_week='$i' AND std_id='$std_id'";
-                                                $intsn_select_date_query = mysqli_query($conn,$sql);
-                                                $intsn_select_date_obj = mysqli_fetch_object($intsn_select_date_query);
-                                                $min_date = $intsn_select_date_obj->min_date;
-                                                $max_date = $intsn_select_date_obj->max_date;
-                                            }
+                                        if ($intsn_object->intsn_job != "") {
+                                            //select วันทำงาน แรกและสุดท้ายของสัปดาห์
+                                            $sql = "SELECT min(intsn_date) as min_date,max(intsn_date) as max_date FROM internship_notes WHERE intsn_week='$i' AND std_id='$std_id'";
+                                            $intsn_select_date_query = mysqli_query($conn, $sql);
+                                            $intsn_select_date_obj = mysqli_fetch_object($intsn_select_date_query);
+                                            $min_date = $intsn_select_date_obj->min_date;
+                                            $max_date = $intsn_select_date_obj->max_date;
+                                        }
                                         ?>
 
                                         <p>วัน/เดือน/ปี ที่ได้รับมอบหมาย: <?= ($intsn_object->intsn_job == "") ? "<span class='text-danger dottedUnderline'>นักศึกษายังไม่ได้บันทึกการทำงานรายสัปดาห์</span>" : "<span class='dottedUnderline'>$min_date</span>" ?></p>
@@ -189,7 +195,9 @@ $stdObj = mysqli_fetch_object($query);
                                         <br>
                                     <?php else : ?>
                                         <p class="text-danger">สัปดาห์ที่ <?= $i ?> ยังไม่มีการบันทึกการฝึกงาน</p>
-                                        <a class="mt-3" href="internship_note_daily_add_form.php?week=<?= $i ?>">บันทึกการฝึกงานรายวัน</a>
+                                        <?php if ($stdObj->std_status == 'อยู่ระหว่างการฝึกงาน') : ?>
+                                            <a class="mt-3" href="internship_note_daily_add_form.php?week=<?= $i ?>">บันทึกการฝึกงานรายวัน</a>
+                                        <?php endif ?>
                                     <?php endif ?>
                                 </div>
                             <?php } ?>
@@ -197,6 +205,22 @@ $stdObj = mysqli_fetch_object($query);
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>พิมพ์รายงาน</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><a target="_blank" href="std_report.php?type=daily&week=all&std_id=<?= $std_id ?>">บันทึกการลงเวลาปฏิบัติงาน (ทั้งหมด)</a></li>
+                            <li><a target="_blank" href="std_report.php?type=weekly&week=all&std_id=<?= $std_id ?>">บันทึกรายละเอียดการฝึกปฏิบัติงานรายสัปดาห์ (ทั้งหมด)</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 

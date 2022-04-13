@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2021 at 02:40 PM
+-- Generation Time: Apr 14, 2022 at 01:25 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -47,7 +47,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`ad_id`, `ad_email`, `ad_password`, `ad_firstname`, `ad_lastname`, `ad_gender`, `ad_address`, `ad_tel`, `ad_image`, `ad_role`, `ad_created`, `ad_updated`) VALUES
-(1, 'thephenome1998@gmail.com', '19e7d665ff5530bf4baf739cfc0d4447', 'วงศ์วสันต์', 'ดวงเกตุ', 'ชาย', 'ประเทศไทย', '0972651700', 'no_avatar.png', 'ผู้ดูแลระบบ', '2021-11-26 13:06:05', '2021-12-07 16:42:00');
+(1, 'thephenome1998@gmail.com', '19e7d665ff5530bf4baf739cfc0d4447', 'วงศ์วสันต์', 'ดวงเกตุ', 'หญิง', 'ประเทศไทย', '0972651700', 'no_avatar.png', 'ผู้ดูแลระบบ', '2021-11-26 13:06:05', '2022-03-30 15:14:59');
 
 -- --------------------------------------------------------
 
@@ -64,6 +64,12 @@ CREATE TABLE `internship_notes` (
   `intsn_work_out` time NOT NULL COMMENT 'เวลาออกงาน',
   `intsn_leave` int(1) NOT NULL COMMENT '0 = มาทำงาน , 1 = ลางาน',
   `intsn_job` text NOT NULL COMMENT 'งานที่ได้รับมอบหมาย',
+  `intsn_work_step` text NOT NULL COMMENT 'ขั้นตอนการปฏิบัติงาน',
+  `intsn_work_result` text NOT NULL COMMENT 'ผลการปฏิบัติงาน',
+  `intsn_work_learn` text NOT NULL COMMENT 'สิ่งที่ได้เรียนรู้จากงานที่ได้รับมอบหมาย',
+  `intsn_work_issue` text NOT NULL COMMENT 'ปัญหาจากการปฏิบัติงาน',
+  `intsn_work_improve` text NOT NULL COMMENT 'สิ่งที่ต้องปรับปรุง',
+  `intsn_work_performance` text NOT NULL COMMENT 'การตรวจสอบผลการปฏิบัติงาน',
   `intsn_ovs_status` varchar(255) NOT NULL COMMENT 'สถานะยืนยันจากหัวหน้างาน',
   `intsn_tch_status` varchar(255) NOT NULL COMMENT 'สถานะยืนยันจากอาจารย์',
   `intsn_created` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'สร้างเมื่อ',
@@ -74,12 +80,12 @@ CREATE TABLE `internship_notes` (
 -- Dumping data for table `internship_notes`
 --
 
-INSERT INTO `internship_notes` (`intsn_id`, `std_id`, `intsn_week`, `intsn_date`, `intsn_work_in`, `intsn_work_out`, `intsn_leave`, `intsn_job`, `intsn_ovs_status`, `intsn_tch_status`, `intsn_created`, `intsn_updated`) VALUES
-(1, 1, 1, '2021-12-21', '08:00:00', '17:00:00', 0, 'จัดส่ง Supply Model ตามไลน์งาน', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2021-12-21 09:01:15', '2021-12-24 05:52:22'),
-(3, 1, 1, '2021-12-22', '07:52:00', '17:05:00', 0, 'จัดส่ง Supply Model ตามไลน์งาน', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2021-12-21 09:02:21', '2021-12-24 05:52:22'),
-(4, 1, 1, '2021-12-23', '00:00:00', '00:00:00', 1, '', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2021-12-21 09:04:16', '2021-12-24 05:52:22'),
-(5, 1, 1, '2021-12-24', '07:36:00', '17:10:00', 0, 'จัดส่ง Supply Model ตามไลน์งาน', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2021-12-21 10:09:29', '2021-12-24 05:52:22'),
-(6, 1, 2, '2021-12-27', '07:55:00', '17:55:00', 0, 'จัดส่ง Supply Model ตามไลน์งาน', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2021-12-24 05:49:19', '2021-12-30 12:43:37');
+INSERT INTO `internship_notes` (`intsn_id`, `std_id`, `intsn_week`, `intsn_date`, `intsn_work_in`, `intsn_work_out`, `intsn_leave`, `intsn_job`, `intsn_work_step`, `intsn_work_result`, `intsn_work_learn`, `intsn_work_issue`, `intsn_work_improve`, `intsn_work_performance`, `intsn_ovs_status`, `intsn_tch_status`, `intsn_created`, `intsn_updated`) VALUES
+(11, 1, 1, '2022-03-30', '07:30:00', '17:05:00', 0, 'ศึกษาข้อมูลการใช้ Node js', '- ค้นหาข้อมูลและพื้นฐานการใช้งาน Node js', '- สามารถเริ่มทำตามขั้นตอนพื้นฐานในการเขียน Node js แบบง่ายๆ ได้', 'ได้เรียนรู้การใช้ Node js ขั้นพื้นฐานในการเขียนการเก็บข้อมูลต่างๆ', 'ปัญหา: ต้องศึกษาพื้นฐานในการเขียน Node js\r\n\r\nการแก้ไข: ดูวิดีโอใน Youtube ดูงานจากพี่ที่ทำงานและสอบถามสิ่งที่ไม่เข้าใจ', 'Node js: การใช้งาน if และ else เพื่อไม่ให้ server พัง', 'เรียนรู้งานและปรับตัวได้เร็ว', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2022-03-30 07:35:50', '2022-03-30 14:20:10'),
+(12, 1, 1, '2022-03-31', '07:01:00', '17:06:00', 0, 'ศึกษาข้อมูลการใช้ Node js', '- ค้นหาข้อมูลและพื้นฐานการใช้งาน Node js', '- สามารถเริ่มทำตามขั้นตอนพื้นฐานในการเขียน Node js แบบง่ายๆ ได้', 'ได้เรียนรู้การใช้ Node js ขั้นพื้นฐานในการเขียนการเก็บข้อมูลต่างๆ', 'ปัญหา: ต้องศึกษาพื้นฐานในการเขียน Node js\r\n\r\nการแก้ไข: ดูวิดีโอใน Youtube ดูงานจากพี่ที่ทำงานและสอบถามสิ่งที่ไม่เข้าใจ', 'Node js: การใช้งาน if และ else เพื่อไม่ให้ server พัง', 'เรียนรู้งานและปรับตัวได้เร็ว', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2022-03-30 11:22:47', '2022-03-30 14:20:10'),
+(13, 1, 2, '2022-04-05', '06:55:00', '17:01:00', 0, 'ศึกษาข้อมูลการใช้ Node js', 'T', 'T', 'T', 'T', 'T', 'ทำงานได้ดีและรวดเร็ว', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2022-03-30 14:39:05', '2022-03-30 14:43:20'),
+(14, 1, 2, '2022-04-06', '07:01:00', '17:02:00', 0, 'ศึกษาข้อมูลการใช้ Node js', 'T', 'T', 'T', 'T', 'T', 'ทำงานได้ดีและรวดเร็ว', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2022-03-30 14:39:39', '2022-03-30 14:43:20'),
+(15, 1, 2, '2022-04-07', '00:00:00', '00:00:00', 1, 'ศึกษาข้อมูลการใช้ Node js', 'T', 'T', 'T', 'T', 'T', 'ทำงานได้ดีและรวดเร็ว', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', '2022-03-30 14:39:51', '2022-03-30 14:43:20');
 
 -- --------------------------------------------------------
 
@@ -126,7 +132,7 @@ CREATE TABLE `internship_works` (
 --
 
 INSERT INTO `internship_works` (`intsw_id`, `std_id`, `intsw_start_date`, `intsw_end_date`, `intsw_date`, `intsw_tch_status`, `intsw_ovs_status`, `tch_id`, `ovs_id`) VALUES
-(3, 1, '2021-12-24', '2022-02-24', '2021-12-24', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', 1, 5);
+(5, 1, '2022-01-01', '2022-05-10', '2022-04-12', 'ยืนยันเรียบร้อย', 'ยืนยันเรียบร้อย', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -170,8 +176,31 @@ CREATE TABLE `students` (
   `std_firstname` varchar(255) NOT NULL COMMENT 'ชื่อจริง',
   `std_lastname` varchar(255) NOT NULL COMMENT 'นามสกุล',
   `std_gender` varchar(255) NOT NULL COMMENT 'เพศ',
+  `std_year` int(4) NOT NULL COMMENT 'ปีการศึกษา',
   `std_address` text NOT NULL COMMENT 'ที่อยู่',
   `std_tel` varchar(255) NOT NULL COMMENT 'เบอร์โทร',
+  `std_class_year` int(1) DEFAULT NULL COMMENT 'ชั้นปี',
+  `std_born` date DEFAULT NULL COMMENT 'วันเดือนปีเกิด',
+  `std_nationality` varchar(255) DEFAULT NULL COMMENT 'สัญชาติ',
+  `std_ethnicity` varchar(255) DEFAULT NULL COMMENT 'เชื้อชาติ',
+  `std_religion` varchar(255) DEFAULT NULL COMMENT 'ศาสนา',
+  `std_number` varchar(255) DEFAULT NULL COMMENT 'รหัสนักศึกษา',
+  `std_id_card` char(13) DEFAULT NULL COMMENT 'รหัสประจำตัวประชาชน',
+  `std_domicile` text DEFAULT NULL COMMENT 'ภูมืลำเนาเดิม',
+  `std_father_name` varchar(255) DEFAULT NULL COMMENT 'ชื่อบิดา',
+  `std_father_age` int(3) DEFAULT NULL COMMENT 'อายุบิดา',
+  `std_father_occupation` varchar(255) DEFAULT NULL COMMENT 'อาชีพบิดา',
+  `std_mother_name` varchar(255) DEFAULT NULL COMMENT 'ชื่อมารดา',
+  `std_mother_age` int(3) DEFAULT NULL COMMENT 'อายุมารดา',
+  `std_mother_occupation` varchar(255) DEFAULT NULL COMMENT 'อาชีพมารดา',
+  `std_parent_name` varchar(255) DEFAULT NULL COMMENT 'ชื่อผู้ปกครอง',
+  `std_parent_relationship` varchar(255) DEFAULT NULL COMMENT 'ความสัมพันธ์ผู้ปกครอง',
+  `std_parent_address` text DEFAULT NULL COMMENT 'ที่อยู่ผู้ปกครอง',
+  `std_parent_tel` varchar(255) DEFAULT NULL COMMENT 'เบอร์โทรศัพท์ผู้ปกครอง',
+  `std_talent_1` varchar(255) DEFAULT NULL COMMENT 'ความสามารถพิเศษ1',
+  `std_talent_2` varchar(255) DEFAULT NULL COMMENT 'ความสามารถพิเศษ2',
+  `std_internship_instuctor` varchar(255) DEFAULT 'คณะกรรมการนิเทศนักศึกษาฝึกงาน' COMMENT 'อาจารย์นิเทศการฝึกงาน',
+  `std_map` text DEFAULT NULL COMMENT 'ไฟล์แผนที่จากที่พักถึงที่ทำงาน',
   `std_image` text NOT NULL COMMENT 'รูปประจำตัว',
   `std_role` varchar(255) NOT NULL DEFAULT 'นักศึกษา' COMMENT 'ตำแหน่ง',
   `tch_id` int(11) NOT NULL COMMENT 'อาจารย์ที่ปรึกษา',
@@ -186,8 +215,8 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`std_id`, `std_email`, `std_password`, `std_firstname`, `std_lastname`, `std_gender`, `std_address`, `std_tel`, `std_image`, `std_role`, `tch_id`, `ovs_id`, `intsp_id`, `std_status`, `std_created`, `std_updated`) VALUES
-(1, 'jirayut@gmail.com', '19e7d665ff5530bf4baf739cfc0d4447', 'จิรายุทธ', 'ก้านมะยม', 'ชาย', 'ประเทศไทย', '0698741122', 'no_avatar.png', 'นักศึกษา', 1, 5, 1, 'สำเร็จการฝึกงาน', '2021-12-07 17:02:24', '2021-12-24 08:54:25');
+INSERT INTO `students` (`std_id`, `std_email`, `std_password`, `std_firstname`, `std_lastname`, `std_gender`, `std_year`, `std_address`, `std_tel`, `std_class_year`, `std_born`, `std_nationality`, `std_ethnicity`, `std_religion`, `std_number`, `std_id_card`, `std_domicile`, `std_father_name`, `std_father_age`, `std_father_occupation`, `std_mother_name`, `std_mother_age`, `std_mother_occupation`, `std_parent_name`, `std_parent_relationship`, `std_parent_address`, `std_parent_tel`, `std_talent_1`, `std_talent_2`, `std_internship_instuctor`, `std_map`, `std_image`, `std_role`, `tch_id`, `ovs_id`, `intsp_id`, `std_status`, `std_created`, `std_updated`) VALUES
+(1, 'jirayut@gmail.com', '19e7d665ff5530bf4baf739cfc0d4447', 'จิรายุทธ', 'ก้านมะยม', 'ชาย', 2564, 'ประเทศไทย', '0698741122', 4, '1998-02-17', 'ไทย', 'ไทย', 'พุทธ', '59180001', '1459900696781', 'ประเทศไทย', 'จิราพล ก้านมะยม', 44, 'ธุรกิจส่วนตัว', 'จิราพร ก้านมะยม', 42, 'ธุรกิจส่วนตัว', 'จิราพล ก้านมะยม', 'บิดา', 'ประเทศไทย', '0972651700', 'เล่นฟุตบอล', 'ตัดต่อวิดีโอ', 'คณะกรรมการนิเทศนักศึกษาฝึกงาน	', '6255a64497392.jpg', 'no_avatar.png', 'นักศึกษา', 1, 5, 1, 'สำเร็จการฝึกงาน', '2021-12-07 17:02:24', '2022-04-12 16:34:56');
 
 -- --------------------------------------------------------
 
@@ -285,7 +314,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `internship_notes`
 --
 ALTER TABLE `internship_notes`
-  MODIFY `intsn_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส', AUTO_INCREMENT=11;
+  MODIFY `intsn_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส', AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `internship_places`
@@ -297,7 +326,7 @@ ALTER TABLE `internship_places`
 -- AUTO_INCREMENT for table `internship_works`
 --
 ALTER TABLE `internship_works`
-  MODIFY `intsw_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส', AUTO_INCREMENT=5;
+  MODIFY `intsw_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `overseers`
@@ -309,7 +338,7 @@ ALTER TABLE `overseers`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `std_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส', AUTO_INCREMENT=5;
+  MODIFY `std_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `teachers`

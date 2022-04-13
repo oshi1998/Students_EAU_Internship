@@ -4,9 +4,13 @@ require_once('permissions/only_admin.php');
 ?>
 
 <?php
-//คำสั่ง SQL
-$sql = "SELECT * FROM students ORDER BY std_created DESC";
-$query = mysqli_query($conn, $sql);
+//คำสั่ง SQL สถานที่ฝึกงาน
+$sql = "SELECT * FROM internship_places ORDER BY intsp_created DESC";
+$intsp_query = mysqli_query($conn, $sql);
+
+//คำสั่ง SQL ปีการศึกษา
+$sql = "SELECT std_year FROM students GROUP BY std_year ORDER BY std_year DESC";
+$std_year_query = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -34,26 +38,31 @@ $query = mysqli_query($conn, $sql);
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3>พิมพ์รายงาน</h3>
+                        <h3>พิมพ์รายงานรายชื่อ อาจารย์ที่ปรึกษา หรือ นักศึกษาฝึกงาน</h3>
                     </div>
                     <div class="card-body w-25">
                         <form action="myreport.php" method="post">
-                            <!-- <select class="form-control" name="std_id">
-                                <option value="" selected disabled>---- เลือกนักศึกษา ----</option>
+                            <label>อาจารย์ที่ปรึกษา หรือ นักศึกษาฝึกงาน</label>
+                            <select class="form-control" name="type">
+                                <option value="teacher">อาจารย์ที่ปรึกษา</option>
+                                <option value="student">นักศึกษาฝึกงาน</option>
+                            </select>
+                            <label>ปีการศึกษา</label>
+                            <select class="form-control" name="year" required>
+                                <option value="" selected disabled>---- เลือกปีการศึกษา ----</option>
+                                <?php foreach ($std_year_query as $row) { ?>
+                                    <option value="<?= $row['std_year'] ?>"><?= $row['std_year'] ?></option>
+                                <?php } ?>
                             </select>
                             <br>
-                            <select class="form-control" name="year">
-                                <option value="" selected disabled>---- ปีการศึกษา ----</option>
-                            </select>
-                            <br>
-                            <select class="form-control" name="tch_id">
-                                <option value="" selected disabled>---- อาจารย์ที่ปรึกษา ----</option>
-                            </select>
-                            <br>
+                            <label>สถานที่ฝึกงาน</label>
                             <select class="form-control" name="intsp_id">
-                                <option value="" selected disabled>---- สถานที่ฝึกงาน ----</option>
+                                <option value="all">---- ทัั้งหมด ----</option>
+                                <?php foreach ($intsp_query as $row) { ?>
+                                    <option value="<?= $row['intsp_id'] ?>"><?= $row['intsp_name'] ?></option>
+                                <?php } ?>
                             </select>
-                            <br> -->
+                            <br>
                             <button type="submit" class="btn btn-success">พิมพ์</button>
                         </form>
                     </div>

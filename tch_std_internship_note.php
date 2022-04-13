@@ -96,6 +96,10 @@ $intsn_query = mysqli_query($conn, $sql);
                                             <?php if ($intsn_num_rows >= 1) : ?>
                                                 <p>สถานะยืนยันจากหัวหน้างาน: <span class="<?= ($intsn_object->intsn_ovs_status == 'ยังไม่ได้รับการยืนยัน') ? "text-danger" : "text-success" ?>"><?= $intsn_object->intsn_ovs_status ?></span></p>
                                                 <p>สถานะยืนยันจากอาจารย์ที่ปรึกษา: <span class="<?= ($intsn_object->intsn_tch_status == 'ยังไม่ได้รับการยืนยัน') ? "text-danger" : "text-success" ?>"><?= $intsn_object->intsn_tch_status ?></span></p>
+                                                <ul>
+                                                    <li><a target="_blank" href="std_report.php?type=daily&week=<?= $intsn['intsn_week'] ?>&std_id=<?= $std_id ?>">บันทึกการลงเวลาปฏิบัติงาน (สัปดาห์ที่ <?= $intsn['intsn_week'] ?>)</a></li>
+                                                    <li><a target="_blank" href="std_report.php?type=weekly&week=<?= $intsn['intsn_week'] ?>&std_id=<?= $std_id ?>">บันทึกรายละเอียดการฝึกปฏิบัติงานรายสัปดาห์ (สัปดาห์ที่ <?= $intsn['intsn_week'] ?>)</a></li>
+                                                </ul>
                                                 <hr>
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered text-center">
